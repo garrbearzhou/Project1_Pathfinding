@@ -9,6 +9,7 @@ import math
 import heapq
 import time
 
+#initialize pygame
 pygame.init()
 
 # Constants
@@ -26,6 +27,7 @@ YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
 GREY = (128, 128, 128)
 
+#define cell (a node)
 class Cell:
     def __init__(self, row, col, width):
         self.row = row
