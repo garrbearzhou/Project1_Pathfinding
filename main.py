@@ -49,7 +49,6 @@ class Cell:
                     continue
             neighbors.append((neighbor, cost))
         return neighbors
-        # need all 8 directions
     def draw(self, win):
         colors = {"unexplored": WHITE, "open": GREY, "closed": RED, "path": GREEN, "wall": BLACK, "start": YELLOW, "goal": BLUE}
         pygame.draw.rect(win, colors[self.state], (self.col*self.width, self.row*self.width + Header, self.width, self.width))
