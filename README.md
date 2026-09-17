@@ -13,7 +13,7 @@ pygame (for the UI and graphics), math (for the calculations required to find th
 heapq (managing the different paths explored and keeping track of the most efficient one), and time (for my additional timer in the header).
 The problem that A* solves is the knowledge of where the goal is and approximately how far the goal is from the current node,
 something that both Dijkstra and BFS do not have. This is called A*'s heuristic. 
-Pathfinding is a simple and applicable example of a search algorithm. The program learns the best path towards the goal by itself.
+Pathfinding is a simple and applicable example of a search algorithm. 
 This can be used in many different scenarios such as autonomous navigation or resource optimization across both digital and physical systems.
 Pathfinding allows computers to evaluate millions of possible routes to find the most efficient one based on pre-determined factors.
 The key features of my project include all 3 heuristics with the ability for the user to switch between them easily, 
