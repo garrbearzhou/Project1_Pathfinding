@@ -34,7 +34,7 @@ to the current node and h(n) is the estimated cost to get from the current node 
 There are 3 main types of heuristics: Diagonal (Chebyshev), Manhattan, and Euclidean. The diagonal heuristic can go in 8 directions like a king on a chessboard and the formula to calculate 
 it is: Max(abs[x1 - x2], abs[y1 - y2]) where (x1, y1) are the coordinates of the goal node, and (x2, y2) are the coordinates of the current node. 
 The manhattan heuristic can only go in 4 directions (1, 0), (0, 1), (-1, 0), (0, -1). The way that you calculate it is: (abs[x1 - x2] + abs[y1 - y2]). Finally, the euclidean 
-heuristic is the most complex one. It is calculated using straight-line distance between two points , but on a 2D plane it has the same functionality as the diagonal heuristic. It is calculated by:
+heuristic is the most complex one. It is calculated using straight-line distance between two points , but on a 2D plane it has the same functionality as the diagonal heuristic. The formula is:
 sqrt([x1-x2]^2 + [y1-y2]^2). The most simple heuristic is manhattan, but it's more time consuming since it can't go into as many different directions, which leads it to predict
 a higher estimated cost to get to the goal. Euclidean is the most complex to implement but the most efficient in a 3D environment; however, in a 2D environment it behaves the same as the diagonal heuristic. The intermediate, and the most efficient for this project is diagonal. Diagonal behaves the same as euclidean, but is more simple to implement. The only benefit of euclidean is that it is more efficient in a 3D environment, but my grid is 2D. 
 ## How to run
@@ -58,7 +58,7 @@ Red nodes are closed (meaning that the algorithm has already explored the node a
 The optimal path between the start and goal nodes will be shown in green after it is found. 
 Black nodes are walls.
 Brown nodes are mud.
-The start node is yellow
+The start node is yellow.
 The goal node is blue. 
 ## AI Use and Sources
 AI Use: Only Flint was used for this project. Here is the link to the chat with Flint I had: https://app.flintk12.com/activities/a-pathfinding-h-26efda/sessions/ac6cc35c-d43b-4962-9871-1109f3e720aa. No other AI tools were consulted or used for this project. In terms of external sources (non-AI) for research:
