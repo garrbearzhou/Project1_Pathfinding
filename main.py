@@ -115,7 +115,7 @@ def astar(grid, start, goal, rows, cols, win, heuristic_fn, font, current_heuris
 
         #cost of path
         cost_text = font.render(f"Cost: {current.g:.2f}", True, BLACK)
-        Win.blit(cost_text, (600, 10))
+        win.blit(cost_text, (600, 10))
 
         pygame.display.update()
         pygame.time.delay(50) #arbitrary choice
@@ -143,6 +143,7 @@ def main():
     font = pygame.font.SysFont("Arial", 20)
     draw_mode = "wall" #tracks whether click/drags draw mud or walls, changed by user with m key
     path_cost = 0.0 #stores final cost after A* runs which is displayed in the header
+    has_run = False #prevents A* from running again after a path is found without resetting
     while running:
         pygame.draw.rect(Win, WHITE, (0, 0, Columns * Width, Header))
         #draw a line indicating the edge of the grid since the top portion is the header with text
@@ -177,7 +178,7 @@ def main():
                             goal.state = "goal"
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    if start and goal:
+                    if start and goal and not has_run: #only run A* if it hasn't already run this setup
                         if current_heuristic == "diagonal":
                             heuristic_fn = heuristic_diagonal
                         elif current_heuristic == "manhattan":
@@ -186,7 +187,8 @@ def main():
                             heuristic_fn = heuristic_euclidean
                         start_time = time.time()
                         result = astar(grid, start, goal, Rows, Columns, Win, heuristic_fn, font, current_heuristic, start_time)
-                        path_cost = result if result is not False else None
+                        has_run = True
+                        path_cost = result if result is not False else 0.0
                         elapsed = time.time() - start_time
                         #if there is no possible path from the start to the goal
                         if result is False:
@@ -198,11 +200,15 @@ def main():
                             grid = [[Cell(row, col, Width) for col in range(Columns)] for row in range(Rows)]
                             start = None
                             goal = None
+                            has_run = False
                 #reset the program after a path is found or no path exists, user just hits "r"
                 if event.key == pygame.K_r:
                     grid = [[Cell(row, col, Width) for col in range(Columns)] for row in range(Rows)]
                     start = None
                     goal = None
+                    elapsed = 0
+                    path_cost = 0.0
+                    has_run = False
                 #user can change the heuristic before the program runs by hitting "h"
                 if event.key == pygame.K_h:
                     if current_heuristic == "diagonal":
