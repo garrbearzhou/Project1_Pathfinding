@@ -36,10 +36,10 @@ class Cell:
         self.row = row
         self.col = col
         self.width = width
-        self.g = float('inf')
-        self.h = 0
-        self.f = float('inf')
-        self.came_from = None
+        self.g = float('inf') #cost from start to this node
+        self.h = 0 #estimated cost from this node to goal (heuristic)
+        self.f = float('inf') #total estimated cost (f = g+h)
+        self.came_from = None #pointer to previous node on cheapest path
         self.state = "unexplored"
     def get_neighbors(self, grid, rows, cols):
         neighbors = []
@@ -63,18 +63,21 @@ class Cell:
         pygame.draw.rect(win, colors[self.state], (self.col*self.width, self.row*self.width + Header, self.width, self.width))
 
 #all three heuristics
+#chebyshev - 8 directional movement (also called diagonal)
 def heuristic_diagonal(cell1, cell2):
     return max(abs(cell1.row - cell2.row), abs(cell1.col - cell2.col))
 
+#4 direction movement only
 def heuristic_manhattan(cell1, cell2):
     return abs(cell1.row - cell2.row) + abs(cell1.col - cell2.col)
 
+#straight line distance, any direction
 def heuristic_euclidean(cell1, cell2):
     return math.sqrt((cell1.row - cell2.row)**2 + (cell1.col - cell2.col)**2)
 
 
 def astar(grid, start, goal, rows, cols, win, heuristic_fn, font, current_heuristic, start_time):
-    counter = 0
+    counter = 0 #tiebreaker to prevent heapq from comparing Cell objects when f values are equal
     open_set = []
     start.g = 0
     start.h = heuristic_fn(start, goal)
@@ -84,13 +87,14 @@ def astar(grid, start, goal, rows, cols, win, heuristic_fn, font, current_heuris
     while open_set:
         current = heapq.heappop(open_set)[2]
         if current == goal:
+            #trace back from goal to start using from pointers to mark optimal path based on cost
             node = goal
             while node is not None:
                 node.state = "path"
                 node = node.came_from
             return goal.g
         if current.state == "closed":
-            continue
+            continue #node was already settled via a cheaper path so skip
         if current != start and current != goal:
             current.state = "closed"
 
@@ -137,8 +141,8 @@ def main():
     current_heuristic = "diagonal"
     elapsed = 0
     font = pygame.font.SysFont("Arial", 20)
-    draw_mode = "wall"
-    path_cost = 0.0
+    draw_mode = "wall" #tracks whether click/drags draw mud or walls, changed by user with m key
+    path_cost = 0.0 #stores final cost after A* runs which is displayed in the header
     while running:
         pygame.draw.rect(Win, WHITE, (0, 0, Columns * Width, Header))
         #draw a line indicating the edge of the grid since the top portion is the header with text
@@ -208,7 +212,7 @@ def main():
                     else:
                         current_heuristic = "diagonal"
                 if event.key == pygame.K_m:
-                    draw_mode = "mud" if draw_mode == "wall" else "wall"
+                    draw_mode = "mud" if draw_mode == "wall" else "wall" #change the draw mode
         #can draw walls, much easier to do then clicking every node you want to be a wall
         if pygame.mouse.get_pressed()[0]:
             pos = pygame.mouse.get_pos()
