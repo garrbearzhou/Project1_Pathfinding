@@ -41,9 +41,24 @@ a higher estimated cost to get to the goal. Euclidean is the most complex to imp
 Python 3.10.2 or higher is required, along with the pygame library (install in terminal with pip install pygame).
 To run the program, clone or download the repository, open a terminal in the project folder or open the project in an IDE such as Pycharm, and run python main.py.
 ## Controls 
-Using all of the features in the program is easy. The first click on the grid (not the header) after the program is running sets the start (yellow), the second click sets the goal (blue), and subsequent clicks or drags can either add walls (program must go around these, black) or mud (cost is triple a normal node, brown). The user can switch between adding walls and mud by clicking the key "m". The user can also switch between the heuristic options by clicking the key "h". Then, the user can run A* by hitting the space bar. Once the program is done, the header will show the heuristic of choice, the time, and the cost of the path. The user can hit the key "r" to reset the program completely and choose new start, goal, wall, and mud nodes, as well as a new heuristic.
+Using all of the features in the program is easy. 
+The first click on the grid (not the header) after the program is running sets the start (yellow).
+The second click sets the goal (blue).
+Subsequent clicks or drags can either add walls (program must go around these, black) or mud (cost is triple a normal node, brown).
+The user can switch between adding walls and mud by clicking the key "m". 
+The user can also switch between the heuristic options by clicking the key "h". 
+Then, the user can run A* by hitting the space bar. 
+Once the program is done, the header will show the heuristic of choice, the time, and the cost of the path. 
+The user can hit the key "r" to reset the program completely and choose new start, goal, wall, and mud nodes, as well as a new heuristic.
 ## Color Legend
-White nodes are unexplored, grey nodes are open (meaning the algorithm knows of the node as a possibility for the optimal path, but it hasn't been fully explored and the cheapest path to get there hasn't been found), and red nodes are closed (meaning that the algorithm has already explored the node and found the cheapest path to get there). The optimal path between the start and goal nodes will be shown in green after it is found. Black nodes are walls, brown nodes are mud, the start node is yellow, and the goal node is blue. 
+White nodes are unexplored
+Grey nodes are open (meaning the algorithm knows of the node as a possibility for the optimal path, but it hasn't been fully explored and the cheapest path to get there hasn't been found)
+Red nodes are closed (meaning that the algorithm has already explored the node and found the cheapest path to get there)
+The optimal path between the start and goal nodes will be shown in green after it is found. 
+Black nodes are walls.
+Brown nodes are mud
+The start node is yellow
+The goal node is blue. 
 ## AI Use and Sources
 AI Use: Only Flint was used for this project. Here is the link to the chat with Flint I had: https://app.flintk12.com/activities/a-pathfinding-h-26efda/sessions/ac6cc35c-d43b-4962-9871-1109f3e720aa. No other AI tools were consulted or used for this project. In terms of external sources (non-AI) for research:
 https://www.geeksforgeeks.org/dsa/a-search-algorithm/
