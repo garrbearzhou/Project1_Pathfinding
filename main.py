@@ -87,7 +87,7 @@ def astar(grid, start, goal, rows, cols, win, heuristic_fn, font, current_heuris
     while open_set:
         current = heapq.heappop(open_set)[2]
         if current == goal:
-            #trace back from goal to start using from pointers to mark optimal path based on cost
+            #trace back from goal to start using came_from pointers to mark optimal path based on cost
             node = goal
             while node is not None:
                 node.state = "path"
